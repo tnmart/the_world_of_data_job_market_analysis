@@ -1,0 +1,6 @@
+-c requirements-dev.txt
+pandas
+numpy
+seaborn
+matplotlib
+scikit-learn
