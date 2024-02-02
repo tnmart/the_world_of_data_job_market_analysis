@@ -69,7 +69,8 @@ def input_data_streamlit(cost_of_living_dataframe):
 
         # Performing the merge operation
         df_merged = new_row.merge(cost_of_living_dataframe, left_on='employee_residence', right_on='country', how='left').drop(columns='country')
-        
+
+        #applying feature transformations to match the saved transformers, encoders and models
         experience_level = {
         'Entry-level': 1,
         'Mid-level': 2,
@@ -96,6 +97,8 @@ def input_data_streamlit(cost_of_living_dataframe):
         'S': 1,
         }
         df_merged['company_size'] = df_merged['company_size'].replace(company_size)
+
+        #Splitting data into numerical and categorical
         df_num = df_merged.select_dtypes(np.number)
         df_cat = df_merged.select_dtypes(object)
 
@@ -177,21 +180,3 @@ def input_data_streamlit(cost_of_living_dataframe):
 # Use the function in Streamlit
 st.title('Jobs in Data - Wage Prediction')
 user_df = input_data_streamlit(cost_of_living)
-
-# # if not user_df.empty:
-# #     st.write('Data Entered:')
-# #     st.write(user_df)
-
-# st.write('The expected salary for the selected features is approximately :')
-# # st.write(f'{user_df} €')
-
-# st.markdown("""
-# <style>
-# .big-font {
-#     font-size:50px !important;
-# }
-# </style>
-# """, unsafe_allow_html=True)
-
-# st.markdown(f'<p class="big-font">{user_df} €</p>', unsafe_allow_html=True)
-
